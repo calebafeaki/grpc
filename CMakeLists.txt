@@ -9061,6 +9061,42 @@ if(_gRPC_PLATFORM_LINUX OR _gRPC_PLATFORM_MAC OR _gRPC_PLATFORM_POSIX)
     grpc_test_util
   )
 
+endif()
+endif()
+if(gRPC_BUILD_TESTS)
+if(_gRPC_PLATFORM_LINUX OR _gRPC_PLATFORM_MAC OR _gRPC_PLATFORM_POSIX)
+
+  add_executable(bad_ssl_alpn_server
+    test/core/bad_ssl/servers/alpn.cc
+    test/core/bad_ssl/server_common.cc
+  )
+  target_compile_features(bad_ssl_alpn_server PUBLIC cxx_std_17)
+  target_include_directories(bad_ssl_alpn_server
+    PRIVATE
+      ${CMAKE_CURRENT_SOURCE_DIR}
+      ${CMAKE_CURRENT_SOURCE_DIR}/include
+      ${_gRPC_PROTO_GENS_DIR}
+  )
+  target_link_libraries(bad_ssl_alpn_server
+    ${_gRPC_ALLTARGETS_LIBRARIES}
+    grpc_test_util
+  )
+
+  add_executable(bad_ssl_cert_server
+    test/core/bad_ssl/servers/cert.cc
+    test/core/bad_ssl/server_common.cc
+  )
+  target_compile_features(bad_ssl_cert_server PUBLIC cxx_std_17)
+  target_include_directories(bad_ssl_cert_server
+    PRIVATE
+      ${CMAKE_CURRENT_SOURCE_DIR}
+      ${CMAKE_CURRENT_SOURCE_DIR}/include
+      ${_gRPC_PROTO_GENS_DIR}
+  )
+  target_link_libraries(bad_ssl_cert_server
+    ${_gRPC_ALLTARGETS_LIBRARIES}
+    grpc_test_util
+  )
 
 endif()
 endif()
